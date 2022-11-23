@@ -42,12 +42,12 @@ func main() {
 	}
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		test := scanner.Text()
-		if strings.Contains(test, "Bid") {
+		input := scanner.Text()
+		if strings.Contains(input, "Bid") {
 			bid, _ := strconv.Atoi(scanner.Text())
 			go sendBid(ctx, client, int32(bid))
 		}
-		if strings.Contains(test, "Result") {
+		if strings.Contains(input, "Result") {
 			go getResult(ctx, client)
 		}
 
@@ -70,8 +70,8 @@ func getResult(ctx context.Context, client handin.AuctionClient) {
 
 	stream, err := client.GetResults(ctx, nil)
 	if err != nil {
-		log.Printf("Cannot send bid: error: %v", err)
+		log.Printf("Unable to get results: error: %v", err)
 	}
-	log.Printf("result %v", stream.HighestBid)
+	log.Printf("Auction still ongoing: %v, currently highest bid: %v", stream.InProcess, stream.HighestBid)
 
 }
