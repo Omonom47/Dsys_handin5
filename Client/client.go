@@ -9,12 +9,12 @@ import (
 	"strconv"
 	"strings"
 
-	// "grpc"
-
 	"google.golang.org/grpc"
 	handin "handin5.dk/uni/grpc"
 )
 
+var responses = make([]handin.Ack, 0, 0)
+var results = make([]handin.Result, 0, 0)
 var id int32
 
 func main() {
@@ -33,64 +33,81 @@ func main() {
 	opts = append(opts, grpc.WithBlock(), grpc.WithInsecure())
 	var client handin.AuctionClient
 
-	port := int32(5003)
+	clientConns := make([]grpc.ClientConn, 0, 0)
 
-	conn, err := grpc.Dial(fmt.Sprintf(":%v", port), opts...)
-	if err != nil {
-		log.Fatalf("Failed to connect: %v", err)
+	for i := 0; i < 3; i++ {
+		port := int32(5000) + int32(i)
+
+		conn, err := grpc.Dial(fmt.Sprintf(":%v", port), opts...)
+		if err != nil {
+			log.Fatalf("Failed to connect: %v", err)
+		}
+		client = handin.NewAuctionClient(conn)
+		clientConns = append(clientConns, *conn)
+		//' client.Connect(conn)
+		defer conn.Close()
 	}
-	client = handin.NewAuctionClient(conn)
-	// client.Connect(conn)
-	defer conn.Close()
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		test := scanner.Text()
-		if strings.Contains(test, "Bid") {
+		input := scanner.Text()
+		if strings.Contains(input, "Bid") {
 			bid, _ := strconv.Atoi(scanner.Text())
-			go sendBid(ctx, client, int32(bid))
+			responses = make([]handin.Ack, 0, 0)
+			for i := 0; i < 3; i++ {
+				go sendBid(ctx, client, int32(bid), clientConns[i])
+			}
+			if responses[0].Outcome != responses[1].Outcome && responses[0].Outcome != responses[2].Outcome {
+				if responses[1].Outcome != responses[2].Outcome {
+					log.Printf(responses[0].Outcome)
+				} else {
+					log.Printf(responses[1].Outcome)
+				}
+			} else {
+				log.Printf(responses[0].Outcome)
+			}
 		}
-		if strings.Contains(test, "Result") {
-			go getResult(ctx, client)
+		if strings.Contains(input, "Result") {
+			responses = make([]handin.Ack, 0, 0)
+			for i := 0; i < 3; i++ {
+				go getResult(ctx, client, clientConns[i])
+			}
+			if results[0].String() != results[1].String() && results[0].String() != results[2].String() {
+				if results[1].String() != results[2].String() {
+					log.Printf(results[0].String())
+				} else {
+					log.Printf(results[1].String())
+				}
+			} else {
+				log.Printf(results[0].String())
+			}
 		}
 
 	}
 }
 
-func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32) {
+func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32, con grpc.ClientConn) {
 	msg := handin.Bid{
 		BidAmount: bidAmount,
 		Id:        id,
 	}
-	_, err := client.SendBid(ctx, &msg)
+	ack, err := client.SendBid(ctx, &msg)
 	if err != nil {
 		log.Printf("Cannot send bid: error: %v", err)
+	} else {
+		responses = append(responses, *ack)
 	}
-
-	// stream.send(&msg)
-
-	// ack, err := stream.CloseAndRecv()
-	// if err != nil {
-	// 	log.Print("Cannot send ack: %v", err)
-	// 	log.Print(ack)
-	// }
 
 }
 
-func getResult(ctx context.Context, client handin.AuctionClient) {
+func getResult(ctx context.Context, client handin.AuctionClient, con grpc.ClientConn) {
 
-	stream, err := client.GetResults(ctx, nil)
+	result, err := client.GetResults(ctx, nil)
 	if err != nil {
-		log.Printf("Cannot send bid: error: %v", err)
+		log.Printf("Unable to get results: error: %v", err)
+	} else {
+		results = append(results, *result)
 	}
-
-	// stream.Send()
-
-	// result, err := stream.CloseAndRecv()
-	// if err != nil {
-	// 	log.Print("Cannot send ack: %v", err)
-	// 	log.Print(result)
-	// }
-	log.Printf("result %v", stream.HighestBid)
+	log.Printf("Auction still ongoing: %v, currently highest bid: %v", result.InProcess, result.HighestBid)
 
 }

@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"context"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 	"os"
 
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/emptypb"
 	handin "handin5.dk/uni/grpc"
 )
 
@@ -61,14 +63,36 @@ func main() {
 		client = handin.NewAuctionClient(conn)
 		//' client.Connect(conn)
 		defer conn.Close()
-		fe.clients[client.Id] = client
+	}
+}
+
+func (s *frontend) SendBid(ctx context.Context, b *handin.Bid) (*handin.Ack, error) {
+
+	if _, ok := s.clients[b.Id]; ok {
+		ack := handin.Ack{Outcome: "SUCCES"}
+		fmt.Printf("ACK: %v", ack)
+		return &ack, nil
+	} else {
+		s.clients[b.Id] = b.Id
+		ack := handin.Ack{Outcome: "SUCCES"}
+		fmt.Printf("ACK: %v", ack)
+		return &ack, nil
 	}
 
+	sendBid(ctx)
+
+}
+
+func (s *frontend) GetResults(ctx context.Context, p *emptypb.Empty) (*handin.Result, error) {
+	//do something here to get result
+	fmt.Printf("Get Result here")
+	res := handin.Result{InProcess: true, HighestBid: 3}
+	return &res, nil
 }
 
 type frontend struct {
 	handin.UnimplementedAuctionServer
-	clients map[int32]handin.AuctionClient
+	clients map[int32]int32
 	ctx     context.Context
 }
 
@@ -93,3 +117,5 @@ func getResult(ctx context.Context, client handin.AuctionClient) {
 	log.Printf("result %v", stream.HighestBid)
 
 }
+
+*/

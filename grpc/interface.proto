@@ -7,8 +7,14 @@ option go_package = "handin5.dk/uni;grpc";
 service Auction{
     rpc sendBid (Bid) returns (Ack) {}
     rpc getResults (google.protobuf.Empty) returns (Result) {}
+    rpc sendBidToFrontEnd (FeBid) returns (Ack) {}
 }
 
+
+
+message FeBid {
+    Bid Bid = 1;
+}
 
 message Bid{
     int32 BidAmount = 1;
@@ -16,7 +22,7 @@ message Bid{
 }
 
 message Ack{
-    int32 outcome = 1;
+    string outcome = 1;
 }
 
 message Result{
