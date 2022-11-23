@@ -16,7 +16,7 @@ message Bid{
 }
 
 message Ack{
-    int32 outcome = 1;
+    string outcome = 1;
 }
 
 message Result{

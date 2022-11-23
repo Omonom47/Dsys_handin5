@@ -16,22 +16,23 @@ import (
 var port = flag.String("server", ":9100", "Tcp server")
 
 func (s *server) SendBid(ctx context.Context, b *handin.Bid) (*handin.Ack, error) {
-	// for _, test := range s.AuctionBids {
-	// 	if proto.Equal(test.BidAmount, b) {
-	// 		ack := handin.Ack{Outcome: 1}
-	// 		return &ack, nil
-	// 	}
-	// }
-	for _, test := range s.auctionBids {
-		if test.BidAmount < b.BidAmount {
-			ack := handin.Ack{Outcome: 1}
+
+	if val, ok := s.auctionBids[b.Id]; ok {
+		if val < b.BidAmount {
+			ack := handin.Ack{Outcome: "SUCCES"}
 			fmt.Printf("ACK: %v", ack)
 			return &ack, nil
+		} else {
+			ack := handin.Ack{Outcome: "FAILURE"}
+			fmt.Printf("ACK: %s", ack.Outcome)
+			return &ack, nil
 		}
+	} else {
+		s.auctionBids[b.Id] = b.BidAmount
+		ack := handin.Ack{Outcome: "SUCCES"}
+		fmt.Printf("ACK: %v", ack)
+		return &ack, nil
 	}
-	fmt.Printf("ACK NO: %v", 0)
-	// No ack was found, return an unnamed ack with 0
-	return &handin.Ack{Outcome: 0}, nil
 }
 
 func (s *server) GetResults(ctx context.Context, p *emptypb.Empty) (*handin.Result, error) {
@@ -68,12 +69,12 @@ func main() {
 
 func newServer() *server {
 	s := &server{
-		auctionBids: make(map[int32]*handin.Bid),
+		auctionBids: make(map[int32]int32),
 	}
 	return s
 }
 
 type server struct {
 	handin.UnimplementedAuctionServer
-	auctionBids map[int32]*handin.Bid
+	auctionBids map[int32]int32
 }

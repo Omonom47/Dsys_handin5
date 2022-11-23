@@ -9,8 +9,6 @@ import (
 	"strconv"
 	"strings"
 
-	// "grpc"
-
 	"google.golang.org/grpc"
 	handin "handin5.dk/uni/grpc"
 )
@@ -40,7 +38,6 @@ func main() {
 			log.Fatalf("Failed to connect: %v", err)
 		}
 		client = handin.NewAuctionClient(conn)
-		// client.Connect(conn)
 		defer conn.Close()
 	}
 	scanner := bufio.NewScanner(os.Stdin)
@@ -67,14 +64,6 @@ func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32) 
 		log.Printf("Cannot send bid: error: %v", err)
 	}
 
-	// stream.send(&msg)
-
-	// ack, err := stream.CloseAndRecv()
-	// if err != nil {
-	// 	log.Print("Cannot send ack: %v", err)
-	// 	log.Print(ack)
-	// }
-
 }
 
 func getResult(ctx context.Context, client handin.AuctionClient) {
@@ -83,14 +72,6 @@ func getResult(ctx context.Context, client handin.AuctionClient) {
 	if err != nil {
 		log.Printf("Cannot send bid: error: %v", err)
 	}
-
-	// stream.Send()
-
-	// result, err := stream.CloseAndRecv()
-	// if err != nil {
-	// 	log.Print("Cannot send ack: %v", err)
-	// 	log.Print(result)
-	// }
 	log.Printf("result %v", stream.HighestBid)
 
 }
