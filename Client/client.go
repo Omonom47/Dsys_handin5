@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,14 +12,18 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/emptypb"
 	handin "handin5.dk/uni/grpc"
 )
 
-var responses = make([]handin.Ack, 0, 0)
+// flag for id
+var flagId = flag.Int("id", 0, "Id for User")
 var results = make([]handin.Result, 0, 0)
-var id int32
+var clientConns = make([]handin.AuctionClient, 0, 0)
 
 func main() {
+	flag.Parse()
+	//makes log file
 	LOG_FILE := "./txtLog"
 	logFile, err := os.OpenFile(LOG_FILE, os.O_APPEND|os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
@@ -34,8 +39,7 @@ func main() {
 	opts = append(opts, grpc.WithBlock(), grpc.WithInsecure())
 	var client handin.AuctionClient
 
-	clientConns := make([]grpc.ClientConn, 0, 0)
-
+	//dials all servers
 	for i := 0; i < 3; i++ {
 		port := int32(5000) + int32(i)
 
@@ -43,82 +47,65 @@ func main() {
 		if err != nil {
 			log.Fatalf("Failed to connect: %v", err)
 		}
+
 		client = handin.NewAuctionClient(conn)
-		clientConns = append(clientConns, *conn)
-		fmt.Println("Connected to server")
-		//' client.Connect(conn)
+		clientConns = append(clientConns, client)
+
+		fmt.Printf("Connected to server on port %v\n", port)
 		defer conn.Close()
 	}
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		scanner.Scan()
-		input := scanner.Text()
-		if strings.Contains(input, "Bid") {
+		input := strings.ToLower(scanner.Text())
+		if strings.Contains(input, "bid") {
 			fmt.Println("Please write the specified amount you wish to bid!")
 			scanner.Scan()
-			bid, _ := strconv.Atoi(scanner.Text())
-			responses = make([]handin.Ack, 0, 0)
-			for i := 0; i < 3; i++ {
-				go sendBid(ctx, client, int32(bid), clientConns[i])
-			}
-			time.Sleep(20)
-			if responses[0].Outcome != responses[1].Outcome && responses[0].Outcome != responses[2].Outcome {
-				if responses[1].Outcome != responses[2].Outcome {
-					log.Printf(responses[0].Outcome)
-				} else {
-					log.Printf(responses[1].Outcome)
-				}
-			} else {
-				log.Printf(responses[0].Outcome)
-			}
-		}
-		if strings.Contains(input, "Result") {
-			responses = make([]handin.Ack, 0, 0)
-			for i := 0; i < 3; i++ {
-				go getResult(ctx, client, clientConns[i])
-			}
-			time.Sleep(20)
-			if results[0].String() != results[1].String() && results[0].String() != results[2].String() {
-				if results[1].String() != results[2].String() {
-					log.Printf(results[0].String())
-				} else {
-					log.Printf(results[1].String())
-				}
-			} else {
-				log.Printf(results[0].String())
-			}
-		}
 
+			bid, _ := strconv.Atoi(scanner.Text())
+			sendBid(ctx, client, int32(bid))
+			time.Sleep(20)
+		}
+		if strings.Contains(input, "result") {
+			getResult(ctx, client)
+		}
 	}
 }
 
-func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32, con grpc.ClientConn) {
-	msg := handin.Bid{
+func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32) {
+	bid := handin.Bid{
 		BidAmount: bidAmount,
-		Id:        id,
+		Id:        int32(*flagId),
 	}
-	ack, err := client.SendBid(ctx, &msg)
-	fmt.Println("Clint", id, "Send Bid")
+	for _, replica := range clientConns {
+		go SendBidConcurrently(ctx, replica, &bid)
+	}
+	fmt.Printf("Clint %v Send Bid\n", *flagId)
+}
+
+// makes it run concurrently so bid can be send to all servers at same time
+func SendBidConcurrently(ctx context.Context, client handin.AuctionClient, bid *handin.Bid) {
+	ack, err := client.SendBid(ctx, bid)
 	if err != nil {
 		log.Printf("Cannot send bid: error: %v", err)
-	} else {
-		responses = append(responses, *ack)
-		fmt.Println(ack)
 	}
-
+	fmt.Println(ack)
 }
 
-func getResult(ctx context.Context, client handin.AuctionClient, con grpc.ClientConn) {
-
-	result, err := client.GetResults(ctx, nil)
-	fmt.Println("Client", id, "ask for results")
-	if err != nil {
-		log.Printf("Unable to get results: error: %v", err)
-	} else {
-		results = append(results, *result)
-		fmt.Println(result)
+func getResult(ctx context.Context, client handin.AuctionClient) {
+	for _, replica := range clientConns {
+		//Code for GetResult in here to call all clients
+		result, err := replica.GetResults(ctx, new(emptypb.Empty))
+		if err != nil {
+			log.Printf("Unable to get results: error: %v", err)
+		} else {
+			fmt.Println(result)
+		}
+		if result.InProcess {
+			log.Printf("Auction still ongoing with currently highest bid: %v", result.HighestBid)
+		} else {
+			log.Printf("Time limit exceeded with final highest bid: %v", result.HighestBid)
+		}
 	}
-	log.Printf("Auction still ongoing: %v, currently highest bid: %v", result.InProcess, result.HighestBid)
-
 }
