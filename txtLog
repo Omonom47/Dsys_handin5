@@ -1,0 +1,202 @@
+2022/11/29 14:17:31 Server connection to port 5002
+2022/11/29 14:18:20 Server connection to port 5000
+2022/11/29 14:18:31 Server connection to port 5001
+2022/11/29 14:18:37 Server connection to port 5002
+2022/11/29 14:21:11 added user 0 with value 1 to server map
+2022/11/29 14:21:11 added user 0 with value 1 to server map
+2022/11/29 14:21:11 added user 0 with value 1 to server map
+2022/11/29 14:21:15 adjusted bid for user 0 with value 2
+2022/11/29 14:21:15 adjusted bid for user 0 with value 2
+2022/11/29 14:21:15 adjusted bid for user 0 with value 2
+2022/11/29 14:21:21 added user 1 with value 1 to server map
+2022/11/29 14:21:21 added user 1 with value 1 to server map
+2022/11/29 14:21:21 added user 1 with value 1 to server map
+2022/11/29 14:21:28 Returned Result to client with current max value of 2
+2022/11/29 14:21:28 Auction still ongoing with currently highest bid: 2
+2022/11/29 14:21:28 Returned Result to client with current max value of 2
+2022/11/29 14:21:28 Auction still ongoing with currently highest bid: 2
+2022/11/29 14:21:28 Returned Result to client with current max value of 2
+2022/11/29 14:21:28 Auction still ongoing with currently highest bid: 2
+2022/11/29 14:21:35 failure to adjust bid for user 1 with value 0, because of smaller value
+2022/11/29 14:21:35 failure to adjust bid for user 1 with value 0, because of smaller value
+2022/11/29 14:21:35 failure to adjust bid for user 1 with value 0, because of smaller value
+2022/11/29 14:21:39 failure to adjust bid for user 1 with value 2, because of smaller value
+2022/11/29 14:21:39 failure to adjust bid for user 1 with value 2, because of smaller value
+2022/11/29 14:21:39 failure to adjust bid for user 1 with value 2, because of smaller value
+2022/11/29 14:21:47 Returned Result to client with current max value of 2
+2022/11/29 14:21:47 Auction still ongoing with currently highest bid: 2
+2022/11/29 14:21:47 Returned Result to client with current max value of 2
+2022/11/29 14:21:47 Auction still ongoing with currently highest bid: 2
+2022/11/29 14:21:47 Returned Result to client with current max value of 2
+2022/11/29 14:21:47 Auction still ongoing with currently highest bid: 2
+2022/11/29 14:21:50 adjusted bid for user 0 with value 3
+2022/11/29 14:21:50 adjusted bid for user 0 with value 3
+2022/11/29 14:21:51 adjusted bid for user 0 with value 3
+2022/11/29 14:21:53 failure to adjust bid for user 0 with value 3, because of smaller value
+2022/11/29 14:21:53 failure to adjust bid for user 0 with value 3, because of smaller value
+2022/11/29 14:21:53 failure to adjust bid for user 0 with value 3, because of smaller value
+2022/11/29 14:21:58 adjusted bid for user 0 with value 4
+2022/11/29 14:21:58 adjusted bid for user 0 with value 4
+2022/11/29 14:21:58 adjusted bid for user 0 with value 4
+2022/11/29 14:21:59 Returned Result to client with current max value of 4
+2022/11/29 14:21:59 Auction still ongoing with currently highest bid: 4
+2022/11/29 14:21:59 Returned Result to client with current max value of 4
+2022/11/29 14:21:59 Auction still ongoing with currently highest bid: 4
+2022/11/29 14:21:59 Returned Result to client with current max value of 4
+2022/11/29 14:21:59 Auction still ongoing with currently highest bid: 4
+2022/11/29 14:22:05 Returned Result to client with current max value of 4
+2022/11/29 14:22:05 Auction still ongoing with currently highest bid: 4
+2022/11/29 14:22:05 Returned Result to client with current max value of 4
+2022/11/29 14:22:05 Auction still ongoing with currently highest bid: 4
+2022/11/29 14:22:05 Returned Result to client with current max value of 4
+2022/11/29 14:22:05 Auction still ongoing with currently highest bid: 4
+2022/11/29 14:22:08 failure to adjust bid for user 1 with value 3, because of smaller value
+2022/11/29 14:22:08 failure to adjust bid for user 1 with value 3, because of smaller value
+2022/11/29 14:22:08 failure to adjust bid for user 1 with value 3, because of smaller value
+2022/11/29 14:31:04 failure to adjust bid for user 1 with value 0, because of smaller value
+2022/11/29 14:31:04 failure to adjust bid for user 1 with value 0, because of smaller value
+2022/11/29 14:31:04 failure to adjust bid for user 1 with value 0, because of smaller value
+2022/11/29 14:31:42 Server connection to port 5000
+2022/11/29 14:31:44 Server connection to port 5001
+2022/11/29 14:31:46 Server connection to port 5002
+2022/11/29 14:31:49 Client 0xc000127570 connected to port 5000, 5001, 5002
+2022/11/29 14:31:49 Client 0xc000123570 connected to port 5000, 5001, 5002
+2022/11/29 14:31:53 added user 0 with value 2 to server map
+2022/11/29 14:31:53 added user 0 with value 2 to server map
+2022/11/29 14:31:53 added user 0 with value 2 to server map
+2022/11/29 14:31:57 failure to adjust bid for user 0 with value 1, because of smaller value
+2022/11/29 14:31:57 failure to adjust bid for user 0 with value 1, because of smaller value
+2022/11/29 14:31:57 failure to adjust bid for user 0 with value 1, because of smaller value
+2022/11/29 14:32:01 added user 1 with value 2 to server map
+2022/11/29 14:32:01 added user 1 with value 2 to server map
+2022/11/29 14:32:01 added user 1 with value 2 to server map
+2022/11/29 14:32:04 failure to adjust bid for user 1 with value 1, because of smaller value
+2022/11/29 14:32:04 failure to adjust bid for user 1 with value 1, because of smaller value
+2022/11/29 14:32:04 failure to adjust bid for user 1 with value 1, because of smaller value
+2022/11/29 14:32:07 adjusted bid for user 1 with value 3
+2022/11/29 14:32:07 adjusted bid for user 1 with value 3
+2022/11/29 14:32:07 adjusted bid for user 1 with value 3
+2022/11/29 14:32:49 adjusted bid for user 0 with value 10
+2022/11/29 14:32:49 adjusted bid for user 0 with value 10
+2022/11/29 14:32:49 adjusted bid for user 0 with value 10
+2022/11/29 14:32:54 failure to adjust bid for user 0 with value 9, because of smaller value
+2022/11/29 14:32:54 failure to adjust bid for user 0 with value 9, because of smaller value
+2022/11/29 14:32:54 failure to adjust bid for user 0 with value 9, because of smaller value
+2022/11/29 14:33:01 failure to adjust bid for user 1 with value 9, because of smaller value
+2022/11/29 14:33:01 failure to adjust bid for user 1 with value 9, because of smaller value
+2022/11/29 14:33:01 failure to adjust bid for user 1 with value 9, because of smaller value
+2022/11/29 14:33:08 failure to adjust bid for user 1 with value 10, because of smaller value
+2022/11/29 14:33:08 failure to adjust bid for user 1 with value 10, because of smaller value
+2022/11/29 14:33:08 failure to adjust bid for user 1 with value 10, because of smaller value
+2022/11/29 14:33:13 adjusted bid for user 1 with value 11
+2022/11/29 14:33:13 adjusted bid for user 1 with value 11
+2022/11/29 14:33:13 adjusted bid for user 1 with value 11
+2022/11/29 14:33:20 adjusted bid for user 1 with value 20
+2022/11/29 14:33:20 adjusted bid for user 1 with value 20
+2022/11/29 14:33:20 adjusted bid for user 1 with value 20
+2022/11/29 14:33:25 failure to adjust bid for user 0 with value 19, because of smaller value
+2022/11/29 14:33:25 failure to adjust bid for user 0 with value 19, because of smaller value
+2022/11/29 14:33:25 failure to adjust bid for user 0 with value 19, because of smaller value
+2022/11/29 14:33:32 Time limited exceeded with highest bid being 0
+2022/11/29 14:33:32 Time limit exceeded with final highest bid: 0
+2022/11/29 14:33:32 Time limited exceeded with highest bid being 0
+2022/11/29 14:33:32 Time limit exceeded with final highest bid: 0
+2022/11/29 14:33:32 Time limited exceeded with highest bid being 0
+2022/11/29 14:33:32 Time limit exceeded with final highest bid: 0
+2022/11/29 14:34:16 Time limited exceeded with highest bid being 0
+2022/11/29 14:34:16 Time limit exceeded with final highest bid: 0
+2022/11/29 14:34:16 Time limited exceeded with highest bid being 0
+2022/11/29 14:34:16 Time limit exceeded with final highest bid: 0
+2022/11/29 14:34:16 Time limited exceeded with highest bid being 0
+2022/11/29 14:34:16 Time limit exceeded with final highest bid: 0
+2022/11/29 14:35:01 Time limited exceeded with highest bid being 0
+2022/11/29 14:35:01 Time limit exceeded with final highest bid: 0
+2022/11/29 14:35:01 Time limited exceeded with highest bid being 0
+2022/11/29 14:35:01 Time limit exceeded with final highest bid: 0
+2022/11/29 14:35:01 Time limited exceeded with highest bid being 0
+2022/11/29 14:35:01 Time limit exceeded with final highest bid: 0
+2022/11/29 14:35:04 Time limited exceeded with highest bid being 0
+2022/11/29 14:35:04 Time limit exceeded with final highest bid: 0
+2022/11/29 14:35:04 Time limited exceeded with highest bid being 0
+2022/11/29 14:35:04 Time limit exceeded with final highest bid: 0
+2022/11/29 14:35:04 Time limited exceeded with highest bid being 0
+2022/11/29 14:35:04 Time limit exceeded with final highest bid: 0
+2022/11/29 14:36:27 Server connection to port 5000
+2022/11/29 14:36:32 Server connection to port 5001
+2022/11/29 14:36:34 Server connection to port 5002
+2022/11/29 14:36:44 Client 0xc0000255b0 connected to port 5000, 5001, 5002
+2022/11/29 14:36:47 Client 0xc0000a7570 connected to port 5000, 5001, 5002
+2022/11/29 14:36:50 added user 0 with value 10 to server map
+2022/11/29 14:36:50 added user 0 with value 10 to server map
+2022/11/29 14:36:50 added user 0 with value 10 to server map
+2022/11/29 14:36:53 failure to adjust bid for user 0 with value 9, because of smaller value
+2022/11/29 14:36:53 failure to adjust bid for user 0 with value 9, because of smaller value
+2022/11/29 14:36:53 failure to adjust bid for user 0 with value 9, because of smaller value
+2022/11/29 14:37:08 Returned Result to client with current max value of 10
+2022/11/29 14:37:08 Auction still ongoing with currently highest bid: 10
+2022/11/29 14:37:08 Returned Result to client with current max value of 10
+2022/11/29 14:37:08 Auction still ongoing with currently highest bid: 10
+2022/11/29 14:37:08 Returned Result to client with current max value of 10
+2022/11/29 14:37:08 Auction still ongoing with currently highest bid: 10
+2022/11/29 14:37:55 Unable to get results: error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp :5000: connectex: No connection could be made because the target machine actively refused it."
+2022/11/29 14:38:08 added user 1 with value 10 to server map
+2022/11/29 14:38:08 added user 1 with value 10 to server map
+2022/11/29 14:38:10 Cannot send bid: error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp :5000: connectex: No connection could be made because the target machine actively refused it."
+2022/11/29 14:38:18 Unable to get results: error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp :5000: connectex: No connection could be made because the target machine actively refused it."
+2022/11/29 14:38:53 Server connection to port 5000
+2022/11/29 14:39:00 Server connection to port 5001
+2022/11/29 14:39:03 Server connection to port 5002
+2022/11/29 14:39:06 Client 0xc0000255b0 connected to port 5000, 5001, 5002
+2022/11/29 14:39:09 Client 0xc0000255b0 connected to port 5000, 5001, 5002
+2022/11/29 14:39:15 added user 0 with value 10 to server map
+2022/11/29 14:39:15 added user 0 with value 10 to server map
+2022/11/29 14:39:15 added user 0 with value 10 to server map
+2022/11/29 14:39:19 added user 1 with value 9 to server map
+2022/11/29 14:39:19 added user 1 with value 9 to server map
+2022/11/29 14:39:19 added user 1 with value 9 to server map
+2022/11/29 14:39:26 Returned Result to client with current max value of 10
+2022/11/29 14:39:26 Auction still ongoing with currently highest bid: 10
+2022/11/29 14:39:26 Returned Result to client with current max value of 10
+2022/11/29 14:39:26 Auction still ongoing with currently highest bid: 10
+2022/11/29 14:39:26 Returned Result to client with current max value of 10
+2022/11/29 14:39:26 Auction still ongoing with currently highest bid: 10
+2022/11/29 14:39:34 adjusted bid for user 1 with value 11
+2022/11/29 14:39:34 adjusted bid for user 1 with value 11
+2022/11/29 14:39:34 adjusted bid for user 1 with value 11
+2022/11/29 14:39:40 failure to adjust bid for user 0 with value 11, because of smaller value
+2022/11/29 14:39:40 failure to adjust bid for user 0 with value 11, because of smaller value
+2022/11/29 14:39:40 failure to adjust bid for user 0 with value 11, because of smaller value
+2022/11/29 14:39:51 failure to adjust bid for user 0 with value 10, because of smaller value
+2022/11/29 14:39:51 failure to adjust bid for user 0 with value 10, because of smaller value
+2022/11/29 14:39:53 Cannot send bid: error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp :5000: connectex: No connection could be made because the target machine actively refused it."
+2022/11/29 14:40:22 adjusted bid for user 0 with value 20
+2022/11/29 14:40:22 adjusted bid for user 0 with value 20
+2022/11/29 14:40:24 Cannot send bid: error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp :5000: connectex: No connection could be made because the target machine actively refused it."
+2022/11/29 14:40:30 failure to adjust bid for user 1 with value 13, because of smaller value
+2022/11/29 14:40:30 failure to adjust bid for user 1 with value 13, because of smaller value
+2022/11/29 14:40:32 Cannot send bid: error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp :5000: connectex: No connection could be made because the target machine actively refused it."
+2022/11/29 14:44:41 Server connection to port 5000
+2022/11/29 14:44:44 Server connection to port 5001
+2022/11/29 14:44:48 Server connection to port 5002
+2022/11/29 14:44:50 Client 0xc0000255b0 connected to port 5000, 5001, 5002
+2022/11/29 14:44:53 Client 0xc0000255b0 connected to port 5000, 5001, 5002
+2022/11/29 14:44:54 added user 0 with value 10 to server map
+2022/11/29 14:44:54 added user 0 with value 10 to server map
+2022/11/29 14:44:54 added user 0 with value 10 to server map
+2022/11/29 14:45:01 added user 1 with value 9 to server map
+2022/11/29 14:45:01 added user 1 with value 9 to server map
+2022/11/29 14:45:01 added user 1 with value 9 to server map
+2022/11/29 14:45:09 failure to adjust bid for user 1 with value 10, because of smaller value
+2022/11/29 14:45:09 failure to adjust bid for user 1 with value 10, because of smaller value
+2022/11/29 14:45:09 failure to adjust bid for user 1 with value 10, because of smaller value
+2022/11/29 14:54:34 Server connection to port 5000
+2022/11/29 14:54:36 Server connection to port 5001
+2022/11/29 14:54:39 Server connection to port 5002
+2022/11/29 14:54:42 Client 0xc0000255b0 connected to port 5000, 5001, 5002
+2022/11/29 14:54:45 Client 0xc0000a7570 connected to port 5000, 5001, 5002
+2022/11/29 14:54:47 added user 0 with value 20 to server map
+2022/11/29 14:54:47 added user 0 with value 20 to server map
+2022/11/29 14:54:47 added user 0 with value 20 to server map
+2022/11/29 14:54:51 failure to adjust bid for user 1 with value 14, because of smaller value
+2022/11/29 14:54:51 failure to adjust bid for user 1 with value 14, because of smaller value
+2022/11/29 14:54:51 failure to adjust bid for user 1 with value 14, because of smaller value

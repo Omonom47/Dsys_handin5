@@ -54,7 +54,7 @@ func main() {
 		fmt.Printf("Connected to server on port %v\n", port)
 		defer conn.Close()
 	}
-
+	log.Printf("Client %v connected to port %v, %v, %v", flagId, 5000, 5001, 5002)
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		scanner.Scan()
@@ -101,11 +101,11 @@ func getResult(ctx context.Context, client handin.AuctionClient) {
 			log.Printf("Unable to get results: error: %v", err)
 		} else {
 			fmt.Println(result)
-		}
-		if result.InProcess {
-			log.Printf("Auction still ongoing with currently highest bid: %v", result.HighestBid)
-		} else {
-			log.Printf("Time limit exceeded with final highest bid: %v", result.HighestBid)
+			if result.InProcess {
+				log.Printf("Auction still ongoing with currently highest bid: %v", result.HighestBid)
+			} else {
+				log.Printf("Time limit exceeded with final highest bid: %v", result.HighestBid)
+			}
 		}
 	}
 }

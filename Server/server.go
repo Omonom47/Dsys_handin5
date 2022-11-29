@@ -19,6 +19,7 @@ var (
 	timeStamp      time.Time
 	timeLimit      time.Time
 	currentHighest int32
+	maxValue       int32
 )
 
 func (s *server) SendBid(ctx context.Context, b *handin.Bid) (*handin.Ack, error) {
@@ -28,30 +29,25 @@ func (s *server) SendBid(ctx context.Context, b *handin.Bid) (*handin.Ack, error
 		timeLimit = timeStamp.Add(time.Duration(1) * time.Minute)
 	}
 
-	if _, ok := s.auctionBids[b.Id]; ok {
-		//makes sure that the bidAmount can't be set to less than the current max
-		var maxValue int32
-		for _, currentBid := range s.auctionBids {
-			if currentBid >= maxValue {
-				maxValue = currentBid
-			}
-		}
-		if maxValue < b.BidAmount {
+	if b.BidAmount > maxValue {
+		maxValue = b.BidAmount
+		if _, ok := s.auctionBids[b.Id]; ok {
+			//makes sure that the bidAmount can't be set to less than the current max
 			ack := handin.Ack{Outcome: "SUCCES"}
 			s.auctionBids[b.Id] = b.BidAmount
 			fmt.Printf("%v for changing bid\n", ack.Outcome)
 			log.Printf("adjusted bid for user %v with value %v", b.Id, b.BidAmount)
 			return &ack, nil
 		} else {
-			ack := handin.Ack{Outcome: "FAILURE"}
-			fmt.Printf("%v for changing bid\n", ack.Outcome)
-			log.Printf("failure to adjust bid for user %v with value %v, because of smaller value", b.Id, b.BidAmount)
+			s.auctionBids[b.Id] = b.BidAmount
+			ack := handin.Ack{Outcome: "SUCCES"}
+			log.Printf("added user %v with value %v to server map", b.Id, b.BidAmount)
 			return &ack, nil
 		}
 	} else {
-		s.auctionBids[b.Id] = b.BidAmount
-		ack := handin.Ack{Outcome: "SUCCES"}
-		log.Printf("added user %v with value %v to server map", b.Id, b.BidAmount)
+		ack := handin.Ack{Outcome: "FAILURE"}
+		fmt.Printf("%v for changing bid\n", ack.Outcome)
+		log.Printf("failure to adjust bid for user %v with value %v, because of smaller value", b.Id, b.BidAmount)
 		return &ack, nil
 	}
 }
