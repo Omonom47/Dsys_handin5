@@ -36,18 +36,18 @@ func (s *server) SendBid(ctx context.Context, b *handin.Bid) (*handin.Ack, error
 			ack := handin.Ack{Outcome: "SUCCES"}
 			s.auctionBids[b.Id] = b.BidAmount
 			fmt.Printf("%v for changing bid\n", ack.Outcome)
-			log.Printf("adjusted bid for user %v with value %v", b.Id, b.BidAmount)
+			log.Printf("adjusted bid for user %v with amount %v", b.Id, b.BidAmount)
 			return &ack, nil
 		} else {
 			s.auctionBids[b.Id] = b.BidAmount
 			ack := handin.Ack{Outcome: "SUCCES"}
-			log.Printf("added user %v with value %v to server map", b.Id, b.BidAmount)
+			log.Printf("added user %v with bid %v to server map", b.Id, b.BidAmount)
 			return &ack, nil
 		}
 	} else {
 		ack := handin.Ack{Outcome: "FAILURE"}
 		fmt.Printf("%v for changing bid\n", ack.Outcome)
-		log.Printf("failure to adjust bid for user %v with value %v, because of smaller value", b.Id, b.BidAmount)
+		log.Printf("failure to adjust bid for user %v with amount %v, because the bid was smaller than then currently highest bid", b.Id, b.BidAmount)
 		return &ack, nil
 	}
 }
@@ -59,7 +59,7 @@ func (s *server) GetResults(ctx context.Context, p *emptypb.Empty) (*handin.Resu
 				currentHighest = highestBid
 			}
 		}
-		log.Printf("Returned Result to client with current max value of %v", currentHighest)
+		log.Printf("Returned Result to client with current highest bid of %v", currentHighest)
 		res := handin.Result{InProcess: true, HighestBid: currentHighest}
 		return &res, nil
 	} else {

@@ -81,7 +81,7 @@ func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32) 
 	for _, replica := range clientConns {
 		go SendBidConcurrently(ctx, replica, &bid)
 	}
-	fmt.Printf("Clint %v Send Bid\n", *flagId)
+	fmt.Printf("Client %v Sent Bid\n", *flagId)
 }
 
 // makes it run concurrently so bid can be send to all servers at same time
