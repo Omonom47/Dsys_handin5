@@ -45,16 +45,16 @@ func main() {
 
 		conn, err := grpc.Dial(fmt.Sprintf(":%v", port), opts...)
 		if err != nil {
-			log.Fatalf("Failed to connect: %v", err)
+			log.Fatalf("Client %v : Failed to connect: %v", flagId, err)
 		}
 
 		client = handin.NewAuctionClient(conn)
 		clientConns = append(clientConns, client)
 
-		fmt.Printf("Connected to server on port %v\n", port)
+		fmt.Printf("Client %v : Connected to server on port %v\n", *flagId, port)
 		defer conn.Close()
 	}
-	log.Printf("Client %v connected to port %v, %v, %v", flagId, 5000, 5001, 5002)
+	log.Printf("Client %v connected to port %v, %v, %v", *flagId, 5000, 5001, 5002)
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		scanner.Scan()
@@ -81,14 +81,14 @@ func sendBid(ctx context.Context, client handin.AuctionClient, bidAmount int32) 
 	for _, replica := range clientConns {
 		go SendBidConcurrently(ctx, replica, &bid)
 	}
-	fmt.Printf("Clint %v Send Bid\n", *flagId)
+	fmt.Printf("Client %v Sent Bid\n", *flagId)
 }
 
 // makes it run concurrently so bid can be send to all servers at same time
 func SendBidConcurrently(ctx context.Context, client handin.AuctionClient, bid *handin.Bid) {
 	ack, err := client.SendBid(ctx, bid)
 	if err != nil {
-		log.Printf("Cannot send bid: error: %v", err)
+		log.Printf("Client %v : Cannot send bid: error: %v", *flagId, err)
 	}
 	fmt.Println(ack)
 }
@@ -98,13 +98,13 @@ func getResult(ctx context.Context, client handin.AuctionClient) {
 		//Code for GetResult in here to call all clients
 		result, err := replica.GetResults(ctx, new(emptypb.Empty))
 		if err != nil {
-			log.Printf("Unable to get results: error: %v", err)
+			log.Printf("Client %v : Unable to get results: error: %v", *flagId, err)
 		} else {
 			fmt.Println(result)
 			if result.InProcess {
-				log.Printf("Auction still ongoing with currently highest bid: %v", result.HighestBid)
+				log.Printf("Client %v : Auction still ongoing with currently highest bid: %v", *flagId, result.HighestBid)
 			} else {
-				log.Printf("Time limit exceeded with final highest bid: %v", result.HighestBid)
+				log.Printf("Client %v : Time limit exceeded with final highest bid: %v", *flagId, result.HighestBid)
 			}
 		}
 	}
